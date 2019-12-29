@@ -18,6 +18,7 @@ import { LoginComponent } from './login/login.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
+import { GoogleSignInService } from './service/google-sign-in.service';
 
 const appRoutes: Routes = [
   /*{ path: 'crisis-center', component: CrisisListComponent },
@@ -69,7 +70,9 @@ const appRoutes: Routes = [
     AngularFireAuthModule,
     NgbModule
   ],
-  providers: [],
+  providers: [
+    GoogleSignInService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
