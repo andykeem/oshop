@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { GoogleSignInService } from './google-sign-in.service';
+import { AuthGuard } from './auth-guard.service';
 
-describe('GoogleSignInService', () => {
+describe('AuthGuard', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: GoogleSignInService = TestBed.get(GoogleSignInService);
+    const service: AuthGuard = TestBed.get(AuthGuard);
     expect(service).toBeTruthy();
   });
 });
