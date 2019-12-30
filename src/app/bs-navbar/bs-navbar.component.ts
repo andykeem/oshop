@@ -12,6 +12,7 @@ import { Router, NavigationExtras } from '@angular/router';
 export class BsNavbarComponent implements OnInit {
 
   user$: Observable<firebase.User>;
+  admin: boolean;
 
   constructor(private auth: AuthService, private router: Router) { }
 
