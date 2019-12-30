@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
 import { Observable } from 'rxjs';
 import { AuthService } from '../service/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'bs-navbar',
@@ -12,9 +13,7 @@ export class BsNavbarComponent implements OnInit {
 
   user$: Observable<firebase.User>;
 
-  constructor(private auth: AuthService) { 
-    
-  }
+  constructor(private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.user$ = this.auth.getAuthState();
@@ -22,5 +21,9 @@ export class BsNavbarComponent implements OnInit {
 
   logout() {
     this.auth.logout();
+  }
+
+  navigateToLogin() {
+    this.router.navigate(['/login'], { queryParams: { returnUrl: this.router.url } });
   }
 }

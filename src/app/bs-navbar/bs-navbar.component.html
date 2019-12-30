@@ -11,7 +11,7 @@
         </li>
         <ng-template #anonymous>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/login">Login</a>
+            <a (click)="navigateToLogin()" class="nav-link">Login</a>
           </li>
         </ng-template>
         <li ngbDropdown *ngIf="user$ | async as user; else anonymous" class="nav-item dropdown">
