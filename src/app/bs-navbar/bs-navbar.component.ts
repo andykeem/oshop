@@ -22,12 +22,4 @@ export class BsNavbarComponent implements OnInit {
   logout() {
     this.auth.logout();
   }
-
-  // navigateToLogin() {
-  //   let navExtras: NavigationExtras = {
-  //     queryParams: { returnUrl: this.router.url },
-  //     queryParamsHandling: 'merge'
-  //   }
-  //   this.router.navigate(['/login'], navExtras);
-  // }
 }
