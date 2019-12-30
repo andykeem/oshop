@@ -21,6 +21,7 @@ import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.componen
 import * as firebase from 'firebase';
 import { AuthService } from './service/auth.service';
 import { AuthGuard } from './service/auth-guard.service';
+import { UserService } from './service/user.service';
 
 const appRoutes: Routes = [
   /*{ path: 'crisis-center', component: CrisisListComponent },
@@ -77,7 +78,8 @@ const appRoutes: Routes = [
   providers: [
     firebase.auth.GoogleAuthProvider,
     AuthService,
-    AuthGuard
+    AuthGuard,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

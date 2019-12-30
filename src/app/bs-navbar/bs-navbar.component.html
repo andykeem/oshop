@@ -11,7 +11,11 @@
         </li>
         <ng-template #anonymous>
           <li class="nav-item">
-            <a (click)="navigateToLogin()" class="nav-link">Login</a>
+            <!-- <a (click)="navigateToLogin()" class="nav-link">Login</a> -->
+            <!-- <a [routerLink]="['/login']" 
+               [queryParams]="{ returnUrl: getReturnUrl() }" 
+               [queryParamsHandling]="merge" class="nav-link">Login</a> -->
+               <a routerLink="/login" class="nav-link">Login</a>
           </li>
         </ng-template>
         <li ngbDropdown *ngIf="user$ | async as user; else anonymous" class="nav-item dropdown">

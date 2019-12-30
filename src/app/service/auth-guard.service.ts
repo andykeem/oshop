@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot, NavigationExtras } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthService } from './auth.service';
@@ -19,8 +19,12 @@ export class AuthGuard implements CanActivate {
           if (user != null) {
             return true;
           }
-          this.auth.setReturnUrl(returnUrl);
-          this.router.navigate(['/login'], { queryParams: { returnUrl: returnUrl } });
+          // this.auth.setReturnUrl(returnUrl);
+          // const navExtras: NavigationExtras = { 
+          //   queryParams: { returnUrl: returnUrl },
+          //   queryParamsHandling: 'merge'
+          // };
+          this.router.navigate(['/login']); // , navExtras);
           return false;
         })
       );

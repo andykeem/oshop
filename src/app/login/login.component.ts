@@ -18,24 +18,24 @@ export class LoginComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.userSubscription = this.auth.getAuthState().subscribe(user => {
-      if (user) {
-        this.navigateToReturnUrl();
-      }
-    });
+    // this.userSubscription = this.auth.getAuthState().subscribe(user => {
+    //   if (user) {
+    //     this.navigateToReturnUrl();
+    //   }
+    // });
   }
 
   ngOnDestroy() {
-    this.userSubscription.unsubscribe();
+    // this.userSubscription.unsubscribe();
   }
 
-  navigateToReturnUrl() {
-    this.route.queryParams.subscribe(params => {
-      if (params.returnUrl) {
-        this.router.navigate([params.returnUrl]);
-      }
-    });
-  }
+  // navigateToReturnUrl() {
+  //   this.route.queryParams.subscribe(params => {
+  //     if (params.returnUrl) {
+  //       this.router.navigate([params.returnUrl]);
+  //     }
+  //   });
+  // }
 
   login() {
     this.auth.login();

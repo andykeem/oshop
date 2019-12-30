@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
 import { Observable } from 'rxjs';
 import { AuthService } from '../service/auth.service';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'bs-navbar',
@@ -23,7 +23,11 @@ export class BsNavbarComponent implements OnInit {
     this.auth.logout();
   }
 
-  navigateToLogin() {
-    this.router.navigate(['/login'], { queryParams: { returnUrl: this.router.url } });
-  }
+  // navigateToLogin() {
+  //   let navExtras: NavigationExtras = {
+  //     queryParams: { returnUrl: this.router.url },
+  //     queryParamsHandling: 'merge'
+  //   }
+  //   this.router.navigate(['/login'], navExtras);
+  // }
 }
