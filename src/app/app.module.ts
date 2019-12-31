@@ -82,7 +82,9 @@ const appRoutes: Routes = [
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    NgbModule
+    NgbModule,
+    MatInputModule,
+    MatTableModule,
   ],
   providers: [
     firebase.auth.GoogleAuthProvider,

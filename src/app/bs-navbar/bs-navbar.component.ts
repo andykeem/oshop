@@ -10,6 +10,7 @@ import { AppUser } from '../model/app-user';
 })
 export class BsNavbarComponent implements OnInit, OnDestroy {
 
+  shopName: string = 'oshop';
   appUser: AppUser;
   userSubscr: Subscription;
 
