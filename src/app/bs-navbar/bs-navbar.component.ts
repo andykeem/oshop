@@ -1,11 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import * as firebase from 'firebase';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { AuthService } from '../service/auth.service';
-import { UserService } from '../service/user.service';
-import { SnapshotAction } from 'angularfire2/database';
 import { AppUser } from '../model/app-user';
-import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'bs-navbar',
@@ -14,30 +10,21 @@ import { switchMap } from 'rxjs/operators';
 })
 export class BsNavbarComponent implements OnInit, OnDestroy {
 
-  user$: Observable<firebase.User>;
-  userSubscription: Subscription;
-  isAdmin: boolean;
+  appUser: AppUser;
+  userSubscr: Subscription;
 
-  constructor(private auth: AuthService, private user: UserService) { }
+  constructor(private auth: AuthService) { }
 
   // Override
   ngOnInit() {
-    this.user$ = this.auth.getAuthState();
-    this.userSubscription = this.user$
-      .pipe(
-        switchMap(user => {
-          let snapshot: Observable<SnapshotAction<AppUser>> = this.user.get(user.uid);
-          return snapshot;
-        })
-      ).subscribe(snapshot => {
-        let appUser: AppUser = snapshot.payload.val() as AppUser;
-        this.isAdmin = appUser.isAdmin;
-      });
+    this.userSubscr = this.auth.appUser$.subscribe(appUser => {
+      this.appUser = appUser;
+    });
   }
 
   // Override
   ngOnDestroy(): void {
-    this.userSubscription.unsubscribe();
+    this.userSubscr.unsubscribe();
   }
 
   logout() {

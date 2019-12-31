@@ -10,3 +10,9 @@ body {
 .dropdown-toggle {
     cursor: pointer;
 }
+/* .dropdown-item {
+    cursor: pointer;
+} */
+a:not([href]) {
+    cursor: pointer;
+}
