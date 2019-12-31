@@ -13,11 +13,15 @@ export class BsNavbarComponent implements OnInit, OnDestroy {
   appUser: AppUser;
   userSubscr: Subscription;
 
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService) {
+    console.log('constructor() called..');
+  }
 
   // Override
   ngOnInit() {
-    this.userSubscr = this.auth.appUser$.subscribe(appUser => {
+    console.log('ngOnInit() method called..');
+    this.userSubscr = this.auth.appUser$
+    .subscribe(appUser => {
       this.appUser = appUser;
     });
   }
