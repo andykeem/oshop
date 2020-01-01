@@ -23,6 +23,10 @@ import { AuthService } from './service/auth.service';
 import { AuthGuard } from './service/auth-guard.service';
 import { UserService } from './service/user.service';
 import { AdminAuthGuard } from './service/admin-auth-guard.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import {MatPaginatorModule} from '@angular/material/paginator'; 
+import {MatSortModule} from '@angular/material/sort'; 
 
 const appRoutes: Routes = [
   /*{ path: 'crisis-center', component: CrisisListComponent },
@@ -83,8 +87,7 @@ const appRoutes: Routes = [
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     NgbModule,
-    MatInputModule,
-    MatTableModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     firebase.auth.GoogleAuthProvider,
