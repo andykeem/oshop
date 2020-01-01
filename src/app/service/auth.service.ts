@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase';
-import { Observable } from 'rxjs';
+import { Observable, empty, of } from 'rxjs';
+import { AppUser } from '../model/app-user';
+import { UserService } from './user.service';
+import { switchMap, map } from 'rxjs/operators';
+import { SnapshotAction } from 'angularfire2/database';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +16,7 @@ export class AuthService {
   user$: Observable<firebase.User>;
   returnUrl: string;
 
-  constructor(private ngFireAuth: AngularFireAuth) {
+  constructor(private ngFireAuth: AngularFireAuth, private userService: UserService) {
     this.user$ = ngFireAuth.authState;
     this.authProvider = new firebase.auth.GoogleAuthProvider();
   }
@@ -43,5 +47,25 @@ export class AuthService {
 
   setReturnUrl(url: string) {
     this.returnUrl = url;
+  }
+
+  get appUser$(): Observable<AppUser> {
+    return this.user$
+      .pipe(
+        switchMap(authUser => {
+          if (authUser === null) {
+            return of(null) as Observable<SnapshotAction<AppUser>>;
+          }
+          let snapshot: Observable<SnapshotAction<AppUser>> = this.userService.get(authUser.uid);
+          return snapshot;
+        }),
+        map(snapshot => {
+          if (snapshot === null) {
+            return null;
+          }
+          let appUser: AppUser = snapshot.payload.val() as AppUser;
+          return appUser;
+        })
+      );
   }
 }

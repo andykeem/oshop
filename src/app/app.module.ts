@@ -22,6 +22,11 @@ import * as firebase from 'firebase';
 import { AuthService } from './service/auth.service';
 import { AuthGuard } from './service/auth-guard.service';
 import { UserService } from './service/user.service';
+import { AdminAuthGuard } from './service/admin-auth-guard.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import {MatPaginatorModule} from '@angular/material/paginator'; 
+import {MatSortModule} from '@angular/material/sort'; 
 
 const appRoutes: Routes = [
   /*{ path: 'crisis-center', component: CrisisListComponent },
@@ -46,8 +51,16 @@ const appRoutes: Routes = [
   { path: 'order-success', component: OrderSuccessComponent, canActivate: [ AuthGuard ] },
   { path: 'my-orders', component: MyOrdersComponent, canActivate: [ AuthGuard ] },
   
-  { path: 'admin/products', component: AdminProductsComponent, canActivate: [ AuthGuard ] },
-  { path: 'admin/orders', component: AdminOrdersComponent, canActivate: [ AuthGuard ] }
+  { 
+    path: 'admin/products', 
+    component: AdminProductsComponent, 
+    canActivate: [ AuthGuard, AdminAuthGuard ] 
+  },
+  { 
+    path: 'admin/orders', 
+    component: AdminOrdersComponent, 
+    canActivate: [ AuthGuard, AdminAuthGuard ] 
+  }
 ];
 
 @NgModule({
@@ -73,12 +86,14 @@ const appRoutes: Routes = [
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    NgbModule
+    NgbModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     firebase.auth.GoogleAuthProvider,
     AuthService,
     AuthGuard,
+    AdminAuthGuard,
     UserService
   ],
   bootstrap: [AppComponent]

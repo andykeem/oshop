@@ -9,33 +9,13 @@ import { Subscription } from 'rxjs';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit, OnDestroy {
+export class LoginComponent implements OnInit {
 
-  userSubscription: Subscription;
-
-  constructor(private auth: AuthService,
-    private router: Router,
-    private route: ActivatedRoute) { }
+  constructor(private auth: AuthService) { }
 
   ngOnInit() {
-    // this.userSubscription = this.auth.getAuthState().subscribe(user => {
-    //   if (user) {
-    //     this.navigateToReturnUrl();
-    //   }
-    // });
+    
   }
-
-  ngOnDestroy() {
-    // this.userSubscription.unsubscribe();
-  }
-
-  // navigateToReturnUrl() {
-  //   this.route.queryParams.subscribe(params => {
-  //     if (params.returnUrl) {
-  //       this.router.navigate([params.returnUrl]);
-  //     }
-  //   });
-  // }
 
   login() {
     this.auth.login();

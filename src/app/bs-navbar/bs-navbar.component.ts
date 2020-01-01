@@ -1,33 +1,38 @@
-import { Component, OnInit } from '@angular/core';
-import * as firebase from 'firebase';
-import { Observable } from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { AuthService } from '../service/auth.service';
-import { Router, NavigationExtras } from '@angular/router';
+import { AppUser } from '../model/app-user';
 
 @Component({
   selector: 'bs-navbar',
   templateUrl: './bs-navbar.component.html',
   styleUrls: ['./bs-navbar.component.css']
 })
-export class BsNavbarComponent implements OnInit {
+export class BsNavbarComponent implements OnInit, OnDestroy {
 
-  user$: Observable<firebase.User>;
+  shopName: string = 'oshop';
+  appUser: AppUser;
+  userSubscr: Subscription;
 
-  constructor(private auth: AuthService, private router: Router) { }
+  constructor(private auth: AuthService) {
+    console.log('constructor() called..');
+  }
 
+  // Override
   ngOnInit() {
-    this.user$ = this.auth.getAuthState();
+    console.log('ngOnInit() method called..');
+    this.userSubscr = this.auth.appUser$
+    .subscribe(appUser => {
+      this.appUser = appUser;
+    });
+  }
+
+  // Override
+  ngOnDestroy(): void {
+    this.userSubscr.unsubscribe();
   }
 
   logout() {
     this.auth.logout();
   }
-
-  // navigateToLogin() {
-  //   let navExtras: NavigationExtras = {
-  //     queryParams: { returnUrl: this.router.url },
-  //     queryParamsHandling: 'merge'
-  //   }
-  //   this.router.navigate(['/login'], navExtras);
-  // }
 }

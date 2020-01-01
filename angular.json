@@ -24,6 +24,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
@@ -49,7 +50,6 @@
               "budgets": [
                 {
                   "type": "initial",
-                  // "maximumWarning": "2mb",
                   "maximumWarning": "4mb",
                   "maximumError": "5mb"
                 },
@@ -91,6 +91,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -122,6 +123,7 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "oshop"
 }
