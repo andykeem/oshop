@@ -52,20 +52,19 @@ export class AuthService {
   get appUser$(): Observable<AppUser> {
     return this.user$
       .pipe(
-        switchMap(authUser => {
+        switchMap((authUser: firebase.User) => {
           if (authUser === null) {
             return of(null) as Observable<SnapshotAction<AppUser>>;
           }
-          let snapshot: Observable<SnapshotAction<AppUser>> = this.userService.get(authUser.uid);
-          return snapshot;
+          let appUserObs: Observable<AppUser> = this.userService.get(authUser.uid);
+          return appUserObs;
         }),
-        map(snapshot => {
-          if (snapshot === null) {
+        map((appUser: AppUser) => {
+          if (appUser === null) {
             return null;
           }
-          let appUser: AppUser = snapshot.payload.val() as AppUser;
           return appUser;
-        })
+        }) 
       );
   }
 }

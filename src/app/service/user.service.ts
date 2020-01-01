@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireObject, AngularFireList, SnapshotAction } from 'angularfire2/database';
 import { AppUser } from '../model/app-user';
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-import { NgbTypeaheadWindow } from '@ng-bootstrap/ng-bootstrap/typeahead/typeahead-window';
-import { applySourceSpanToExpressionIfNeeded } from '@angular/compiler/src/output/output_ast';
+import { Observable, empty } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -20,13 +17,14 @@ export class UserService {
     });
   }
 
-  get(uid: string): Observable<SnapshotAction<AppUser>> {
+  get(uid: string): Observable<AppUser> {
     // this.db.object<AppUser>('/users/' + uid).snapshotChanges()
     //   .subscribe(item => {
     //     let appUser: AppUser = (item.payload.toJSON() as AppUser);
     //     return appUser;
     //   });
     // return null;
-    return this.db.object<AppUser>('/users/' + uid).snapshotChanges();
+    
+    return this.db.object<AppUser>('users/' + uid).valueChanges();
   }
 }

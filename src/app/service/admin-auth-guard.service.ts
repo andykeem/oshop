@@ -20,8 +20,8 @@ export class AdminAuthGuard implements CanActivate {
         switchMap(authUser => {
           return this.user.get(authUser.uid);
         }),
-        map(item => {
-          let appUser: AppUser = item.payload.val() as AppUser;
+        map((appUser: AppUser) => {
+          // let appUser: AppUser = item.payload.val() as AppUser;
           return appUser.isAdmin;
         })
       );
